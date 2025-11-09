@@ -16,14 +16,17 @@ def stir_constraints(sample: Sample):
             return False
         if sample.data['container']['subcontainer']['subcontainer_name'] != "50ml_centrifuge_tube":
             return False
-        if (sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
-                sample.data['container']['subcontainer']['subcontainer_number'] < 1):
+        if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
+            sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
+            sample.data['container']['subcontainer']['subcontainer_number'] < 1):
             return False
         if sample.data['container']['subcontainer']['subcontainer_phase'] not in ['liquid', 'slurry']:
             return False
         if sample.data['container']['subcontainer']['covered'] is not False:
             return False
-        if sample.data['container']['subcontainer']['subcontainer_volume'] < 3:
+        if (sample.data['container']['subcontainer']['subcontainer_volume'] is None or
+            sample.data['container']['subcontainer']['subcontainer_volume'] < 3 or 
+            sample.data['container']['subcontainer']['subcontainer_volume'] >= 50):
             return False
     except Exception as e:
         print(e)

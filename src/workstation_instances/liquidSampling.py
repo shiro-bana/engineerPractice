@@ -18,8 +18,9 @@ def liquidSampling_constraints(sample: Sample):
         if sample.data['container']['subcontainer']['subcontainer_name'] != "50ml_centrifuge_tube":
             return False
         # 总试管数在1-10之间
-        if (sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
-                sample.data['container']['subcontainer']['subcontainer_number'] < 1):
+        if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
+            sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
+            sample.data['container']['subcontainer']['subcontainer_number'] < 1):
             return False
         # 试管里得是液体或固体, 或者为空
         if (sample.data['container']['subcontainer']['subcontainer_volume'] != 0 and 
