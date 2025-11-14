@@ -31,6 +31,7 @@ def solid_injection_constraints(sample: Sample):
 # 比原来的容量高一点
 def solid_injection_ability(sample: Sample):
     # 离心管出来是固体
+    # sample.data['phase'] = 'solid'
     sample.data['container']['container_phase'] = 'solid'
     # 比原来的容量高一点
     new_volume = sample.data['container']['container_volume'] + random.randint(1, 5)

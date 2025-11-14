@@ -40,10 +40,12 @@ def liquid_injection_constraints(sample: Sample):
 # 比原来多一点
 # 出来之后要少于30ml
 def liquid_injection_ability(sample: Sample):
+    # sample.data['container']['subcontainer']['covered'] = True
     if sample.data['container']['subcontainer']['subcontainer_volume'] == 0:
         sample.data['container']['subcontainer']['subcontainer_phase'] = 'liquid'
     if sample.data['container']['subcontainer']['subcontainer_phase'] == 'solid':
         sample.data['container']['subcontainer']['subcontainer_phase'] = 'suspension'
+    # sample.data['phase'] = sample.data['container']['subcontainer']['subcontainer_phase']
     # 比原来的容量高一点，但不能超过30ml
     new_volume = sample.data['container']['subcontainer']['subcontainer_volume'] + random.randint(1, 5)
     sample.data['container']['subcontainer']['subcontainer_volume'] = min(new_volume, 30)
