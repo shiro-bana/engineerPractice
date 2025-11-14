@@ -10,7 +10,7 @@ import random
 # 液体或者固液混合
 # 盖子没盖住
 # 必须要有样品（3ml以上）
-def stir_constraints(sample: Sample):
+def stirring_constraints(sample: Sample):
     try:
         if sample.data['container']['container_name'] != "rack":
             raise Exception("容器必须是离心管架")
@@ -35,11 +35,11 @@ def stir_constraints(sample: Sample):
 
 # 能力：
 # 搅拌（不做任何处理）
-def stir_ability(sample: Sample):
+def stirring_ability(sample: Sample):
     return sample
 
-stir = WorkstationAbility(
-    name="stir",
-    constraints=stir_constraints,
-    ability=stir_ability
+stirring = WorkstationAbility(
+    name="stirring",
+    constraints=stirring_constraints,
+    ability=stirring_ability
 )

@@ -7,7 +7,7 @@ import random
 # 容器必须是50ml离心管
 # 离心管没有盖子
 # 没放满
-def solid_sampling_constraints(sample: Sample):
+def solid_injection_constraints(sample: Sample):
     try:
         # 容器必须是50ml离心管
         if sample.data['container']['container_name'] != "50ml_centrifuge_tube":
@@ -29,7 +29,7 @@ def solid_sampling_constraints(sample: Sample):
 # 能力：
 # 离心管出来是固体
 # 比原来的容量高一点
-def solid_sampling_ability(sample: Sample):
+def solid_injection_ability(sample: Sample):
     # 离心管出来是固体
     sample.data['container']['container_phase'] = 'solid'
     # 比原来的容量高一点
@@ -38,8 +38,8 @@ def solid_sampling_ability(sample: Sample):
     sample.data['container']['container_volume'] = min(new_volume, 50)
     return sample
 
-solid_sampling = WorkstationAbility(
-    name="solid_sampling",
-    constraints=solid_sampling_constraints,
-    ability=solid_sampling_ability
+solid_injection = WorkstationAbility(
+    name="solid_injection",
+    constraints=solid_injection_constraints,
+    ability=solid_injection_ability
 )

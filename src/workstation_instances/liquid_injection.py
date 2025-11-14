@@ -9,7 +9,7 @@ import random
 # 离心管架上是50ml离心管
 # 离心管有1-10个
 # 少于30ml
-def liquid_sampling_constraints(sample: Sample):
+def liquid_injection_constraints(sample: Sample):
     try:
         # 容器必须是离心管架
         if sample.data['container']['container_name'] != "rack":
@@ -39,7 +39,7 @@ def liquid_sampling_constraints(sample: Sample):
 # 离心管出来是液体，可能是悬浊液，可能是纯液体
 # 比原来多一点
 # 出来之后要少于30ml
-def liquid_sampling_ability(sample: Sample):
+def liquid_injection_ability(sample: Sample):
     if sample.data['container']['subcontainer']['subcontainer_volume'] == 0:
         sample.data['container']['subcontainer']['subcontainer_phase'] = 'liquid'
     if sample.data['container']['subcontainer']['subcontainer_phase'] == 'solid':
@@ -49,8 +49,8 @@ def liquid_sampling_ability(sample: Sample):
     sample.data['container']['subcontainer']['subcontainer_volume'] = min(new_volume, 30)
     return sample
 
-liquid_sampling = WorkstationAbility(
-    name="liquid_sampling",
-    constraints=liquid_sampling_constraints,
-    ability=liquid_sampling_ability
+liquid_injection = WorkstationAbility(
+    name="liquid_injection",
+    constraints=liquid_injection_constraints,
+    ability=liquid_injection_ability
 )
