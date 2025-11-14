@@ -7,20 +7,20 @@ import random
 # 容器必须是50ml离心管
 # 离心管没有盖子
 # 没放满
-def solidSampling_constraints(sample: Sample):
+def solid_sampling_constraints(sample: Sample):
     try:
         # 容器必须是50ml离心管
         if sample.data['container']['container_name'] != "50ml_centrifuge_tube":
-            return False
+            raise Exception("容器必须是50ml离心管")
         # 离心管没有盖子
         if sample.data['container']['covered'] is not False:
-            return False
+            raise Exception("离心管要有盖子")
         # 进样前为空或状态为固体
         if sample.data['container']['container_volume'] != 0 and sample.data['container']['container_phase'] != 'solid':
-            return False 
+            raise Exception("离心管里必须为空或固体")
         # 没放满
         if sample.data['container']['container_volume'] >= 50:
-            return False
+            raise Exception("离心管内的固体不能超过50ml离心管的容量")
     except Exception as e:
         print(e)
         return False
@@ -29,7 +29,7 @@ def solidSampling_constraints(sample: Sample):
 # 能力：
 # 离心管出来是固体
 # 比原来的容量高一点
-def solidSampling_ability(sample: Sample):
+def solid_sampling_ability(sample: Sample):
     # 离心管出来是固体
     sample.data['container']['container_phase'] = 'solid'
     # 比原来的容量高一点
@@ -38,8 +38,8 @@ def solidSampling_ability(sample: Sample):
     sample.data['container']['container_volume'] = min(new_volume, 50)
     return sample
 
-solidSampling = WorkstationAbility(
-    name="solidSampling",
-    constraints=solidSampling_constraints,
-    ability=solidSampling_ability
+solid_sampling = WorkstationAbility(
+    name="solid_sampling",
+    constraints=solid_sampling_constraints,
+    ability=solid_sampling_ability
 )
