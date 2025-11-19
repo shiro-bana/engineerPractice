@@ -2,6 +2,7 @@ from workstation import WorkstationAbility
 from sample import Sample
 import random
 
+# 离心纯化工作站
 # 限制：
 # 必须是离心管架进样
 # 离心管架上的容器可为50ml试管

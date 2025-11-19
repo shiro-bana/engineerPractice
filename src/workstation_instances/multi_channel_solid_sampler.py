@@ -2,6 +2,7 @@ from workstation import WorkstationAbility
 from sample import Sample
 import random
 
+# 多通道固体进样器
 # 限制：
 # 容器为50ml试管、聚四氟反应瓶、西林瓶
 # 总容器数在1-20之间

@@ -2,7 +2,7 @@ from workstation import WorkstationAbility
 from sample import Sample
 import random
 
-
+# 离心管架分液站
 def decentralization_constraints(sample: Sample):
     try:
         # 容器必须是离心管架

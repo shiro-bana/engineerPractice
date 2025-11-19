@@ -2,6 +2,7 @@ from workstation import WorkstationAbility
 from sample import Sample
 import random
 
+# 磁力搅拌工作站
 # 限制：
 # 容器必须是离心管架
 # 离心管架上的容器可为50ml试管、聚四氟反应瓶、西林瓶

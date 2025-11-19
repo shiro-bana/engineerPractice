@@ -1,6 +1,7 @@
 from workstation import WorkstationAbility
 from sample import Sample
 
+# 双工位电化学工作站
 # 限制：
 # 必须是离心管架进样
 # 离心管架上的容器为50ml试管

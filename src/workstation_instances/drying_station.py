@@ -1,7 +1,7 @@
 from workstation import WorkstationAbility
 from sample import Sample
 
-
+# 烘干机
 # 限制：
 # 容器必须是离心管架
 # 离心管架上的容器可为50ml试管、聚四氟反应瓶、西林瓶
