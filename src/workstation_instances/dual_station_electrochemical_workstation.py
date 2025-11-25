@@ -35,6 +35,7 @@ def dual_station_electrochemical_workstation_constraints(sample: Sample):
 # 容器内是悬浊液
 # 容器内体积基本不变
 def dual_station_electrochemical_workstation_ability(sample: Sample):
+    # 混合均匀的悬浊液和悬浊液是否需要作区分？
     return sample
 
 dual_station_electrochemical_workstation = WorkstationAbility(

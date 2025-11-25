@@ -16,7 +16,7 @@ def high_throughput_xrd_workstation_constraints(sample: Sample):
         if sample.data['container']['subcontainer']['subcontainer_name'] not in ["50ml_centrifuge_tube"]:
             raise Exception("离心管架上容器应为50ml试管")
         if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
-            sample.data['container']['subcontainer']['subcontainer_number'] > 20 or
+            sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):
             raise Exception("总容器数在1-10之间")
         if sample.data['container']['subcontainer']['covered'] is not False:
@@ -33,7 +33,7 @@ def high_throughput_xrd_workstation_constraints(sample: Sample):
     return True
 
 # 输出：
-# 容器内为悬浊液
+# 容器内为悬浊液（状态未改变）
 def high_throughput_xrd_workstation_ability(sample: Sample):
     return sample
 

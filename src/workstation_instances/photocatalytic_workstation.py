@@ -11,6 +11,7 @@ def photocatalytic_workstation_constraints(sample: Sample):
     try:
         if sample.data['container']['container_name'] != "vial":
             raise Exception("容器必须是西林瓶")
+        ##### 这里的总容器数是指光催化工作站的插槽数，不能使用sample的subcontainer_number来表示 #####
         if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
             sample.data['container']['subcontainer']['subcontainer_number'] > 20 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):

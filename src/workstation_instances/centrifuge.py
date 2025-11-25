@@ -35,7 +35,7 @@ def centrifuge_constraints(sample: Sample):
 # 液体量不发生变化
 # 固液分离，固体在下层、液体在上层
 def centrifuge_ability(sample: Sample):
-    # sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_liquid_overlay'
+    sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_liquid_overlay'
     return sample
 
 centrifuge = WorkstationAbility(

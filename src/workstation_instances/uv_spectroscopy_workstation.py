@@ -36,7 +36,7 @@ def uv_spectroscopy_workstation_constraints(sample: Sample):
 # 容器内为液体
 # 容器内体积小幅减少
 def uv_spectroscopy_workstation_ability(sample: Sample):
-    # 减少 1-3 ml 液体
+    # 减少 1-3 ml 液体(约束为容器内体积至少8ml，所以不会减少到负数)
     reduction = random.uniform(1, 3)
     sample.data['container']['subcontainer']['subcontainer_volume'] -= reduction
     return sample

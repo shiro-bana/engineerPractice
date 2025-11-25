@@ -11,6 +11,7 @@ def multi_channel_solid_sampler_constraints(sample: Sample):
     try:
         if sample.data['container']['subcontainer']['subcontainer_name'] not in ["50ml_centrifuge_tube", "ptfe_reaction_bottle", "vial"]:
             raise Exception("容器应为50ml试管、聚四氟反应瓶或西林瓶")
+        # 这里的总容器数为多通道进样器的通道数， 而非离心管架的离心管数，不应与sample的(sub)container_number做关联
         if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
             sample.data['container']['subcontainer']['subcontainer_number'] > 20 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):

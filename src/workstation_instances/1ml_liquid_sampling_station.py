@@ -41,18 +41,34 @@ def liquid_sampling_station_constraints(sample: Sample):
 # 3，无盖-无盖
 # 容器没有盖子
 # 容器内体积不超过30ml
-# 溶液量有一定程度增加kkk
-def liquid_sampling_station_ability(sample: Sample):
+# 溶液量有一定程度增加
+def liquid_sampling_station_ability_cover2uncover(sample: Sample):
+    # 增加 1ml 液体
+    if sample.data['container']['subcontainer']['covered'] is True:
+        sample.data['container']['subcontainer']['covered'] = False
+    new_volume = sample.data['container']['subcontainer']['subcontainer_volume'] + 1
+    sample.data['container']['subcontainer']['subcontainer_volume'] = min(new_volume, 30)
+    return sample
+
+def liquid_sampling_station_ability_uncover2cover(sample: Sample):
+    # 增加 1ml 液体
+    if sample.data['container']['subcontainer']['covered'] is False:
+        sample.data['container']['subcontainer']['covered'] = True
+    new_volume = sample.data['container']['subcontainer']['subcontainer_volume'] + 1
+    sample.data['container']['subcontainer']['subcontainer_volume'] = min(new_volume, 30)
+    return sample
+
+def liquid_sampling_station_ability_nochange(sample: Sample):
+    # 将有盖-有盖，无盖-无盖统一处理
     # 增加 1ml 液体
     new_volume = sample.data['container']['subcontainer']['subcontainer_volume'] + 1
     sample.data['container']['subcontainer']['subcontainer_volume'] = min(new_volume, 30)
-
     return sample
 
 liquid_sampling_station = WorkstationAbility(
     name="liquid_sampling_station",
     constraints=liquid_sampling_station_constraints,
-    ability=liquid_sampling_station_ability
+    ability=liquid_sampling_station_ability_nochange
 )
 
 

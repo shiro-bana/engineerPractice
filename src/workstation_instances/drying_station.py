@@ -18,7 +18,7 @@ def drying_station_constraints(sample: Sample):
             sample.data['container']['subcontainer']['subcontainer_number'] > 10 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):
             raise Exception("总容器数在1-10之间")
-        if sample.data['container']['subcontainer']['subcontainer_phase'] not in ['liquid', 'suspension', 'solid']:
+        if sample.data['container']['subcontainer']['subcontainer_phase'] not in ['liquid', 'suspension', 'solid_with_tiny_liquid']:
             raise Exception("容器里为纯液体或悬浊液或纯固体带有微量液体")
         if sample.data['container']['subcontainer']['subcontainer_volume'] > 30:
             raise Exception("容器内体积不超过30ml")
@@ -35,8 +35,22 @@ def drying_station_constraints(sample: Sample):
 # 输出：
 # 容器内为纯固体
 def drying_station_ability(sample: Sample):
-    
-
+    # 有盖子，烘干后仍为液体或悬浊液，体积减少
+    if sample.data['container']['subcontainer']['covered'] is True:
+        new_volume = sample.data['container']['subcontainer']['subcontainer_volume'] * 0.8
+        sample.data['container']['subcontainer']['subcontainer_volume'] = max(new_volume, 1)
+    # 没有盖子，烘干后变为纯固体
+    elif sample.data['container']['subcontainer']['covered'] is False:
+        # 根据液体量决定剩余量  
+        if sample.data['container']['subcontainer']['subcontainer_phase'] == 'liquid':
+            sample.data['container']['subcontainer']['subcontainer_volume'] *= 0.3
+        elif sample.data['container']['subcontainer']['subcontainer_phase'] == 'suspension':
+            sample.data['container']['subcontainer']['subcontainer_volume'] *= 0.5
+        elif sample.data['container']['subcontainer']['subcontainer_phase'] == 'solid_with_tiny_liquid':
+            sample.data['container']['subcontainer']['subcontainer_volume'] *= 0.9
+        # 没有盖子最后变为纯固体
+        sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid'
+        
     return sample
 
 drying_station = WorkstationAbility(

@@ -50,6 +50,11 @@ sample:
         - "ir_base_piece_rack"
         - "lithography_piece"
         - "96_hole_plate"
+        - "24_hole_plate"
+        - "48_hole_plate"
+        - "chromatography_vial"   # 色谱小瓶
+        - "ptfe_reaction_bottle"  # 聚四氟反应瓶
+        - "vial"  # 西林瓶
     container_volume:
       type: number
     subcontainer:
@@ -67,6 +72,8 @@ sample:
           - "gas"
           - "slurry"
           - "suspension"
+          - "solid_with_liquid_overlay" # 固液分层
+          - "solid_with_tiny_liquid"    # 固体带有微量液体
           - "unknown"
       covered:
         type: boolean

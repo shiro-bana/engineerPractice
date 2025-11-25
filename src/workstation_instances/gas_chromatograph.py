@@ -11,13 +11,19 @@ def gas_chromatograph_constraints(sample: Sample):
     try:
         if sample.data['container']['container_name'] != "chromatography_vial":
             raise Exception("容器必须是色谱瓶")
+        ####### 这里的总容器数很可能指代气相色谱仪能处理的样品数量，不能用sample的subcontainer_number表示 ########
         if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
             sample.data['container']['subcontainer']['subcontainer_number'] > 25 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):
             raise Exception("总容器数在1-25之间")
         if sample.data['container']['subcontainer']['covered'] is not True:
             raise Exception("容器必须有盖子")
-        if sample.data['container']['subcontainer']['subcontainer_phase'] != 'liquid':
+        # 这里的液体是否指纯液体？悬浊液是否允许？
+        if sample.data['container']['subcontainer']['subcontainer_phase'] not in ['liquid']:
+            raise Exception("容器内必须为液体")
+        if (sample.data['container']['subcontainer']['subcontainer_volume'] is None or
+            sample.data['container']['subcontainer']['subcontainer_volume'] <= 0 or
+            sample.data['container']['subcontainer']['subcontainer_volume'] > 5):
             raise Exception("容器内必须有微量液体")
     except Exception as e:
         print(e)

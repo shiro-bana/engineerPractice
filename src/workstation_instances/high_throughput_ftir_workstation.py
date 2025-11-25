@@ -33,9 +33,8 @@ def high_throughput_ftir_workstation_constaints(sample: Sample):
     return True
 
 # 输出：
-# 容器内为悬浊液
+# 容器内为悬浊液（状态未改变）
 def high_throughput_ftir_workstation_ability(sample: Sample):
-    
     return sample
 
 high_throughput_ftir_workstation = WorkstationAbility(

@@ -42,18 +42,20 @@ def centrifugal_purification_workstation_constraints(sample: Sample):
 # 输出：
 # 容器内为纯固体和微量的液体
 # 容器有盖子
+
+# 约束时已保证有盖子，有盖子状态未发生改变，不作修改
 def centrifugal_purification_workstation_ability_with_wash_liquid(sample: Sample):
     # 设置体积为 5-30ml
     sample.data['container']['subcontainer']['subcontainer_volume'] = random.randint(5, 30)
     # 设置相态为下层固体，上层液体
-    # sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_liquid_overlay'
+    sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_liquid_overlay'
     return sample
 
 def centrifugal_purification_workstation_ability_without_wash_liquid(sample: Sample):
     # 设置体积为 2-5ml
     sample.data['container']['subcontainer']['subcontainer_volume'] = random.randint(2, 5)
     # 设置相态为纯固体和微量液体
-    # sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_trace_liquid'
+    sample.data['container']['subcontainer']['subcontainer_phase'] = 'solid_with_tiny_liquid'
     return sample
 
 centrifugal_purification_with_wash_liquid = WorkstationAbility(

@@ -11,6 +11,7 @@ def liquid_chromatograph_constraints(sample: Sample):
     try:
         if sample.data['container']['container_name'] != "chromatography_vial":
             raise Exception("容器必须是色谱瓶")
+        ###### 这里总容器数可能指代液相色谱仪的容量，可能无法用subcontainer_number指代 ######
         if (sample.data['container']['subcontainer']['subcontainer_number'] is None or
             sample.data['container']['subcontainer']['subcontainer_number'] > 54 or
             sample.data['container']['subcontainer']['subcontainer_number'] < 1):
